@@ -1,0 +1,26 @@
+.rating-stars-display {
+    width: 100%;
+    height: 100%;
+}
+
+.rating-div {
+    margin: 15px;
+    padding: 10px;
+    display: block;
+}
+
+.star {
+    color: grey;
+    font-size: 50px;
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px;
+}
+
+.star-hover {
+    color: orangered;
+}
+
+.star-rated {
+    color: orange;
+}
