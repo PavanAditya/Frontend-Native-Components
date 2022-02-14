@@ -8,11 +8,13 @@ function changeSlide(inc) {
         displaySlides(slideIndex += inc);
 }
 
+// ? Function for changing the slide when the user clicks on the dots.
 function jumpToSlide(index) {
     slideIndex = index;
     displaySlides(slideIndex);
 }
 
+// ? Fuction for displaying the slides in a slideshow.
 function displaySlides(val) {
     let slidesList = document.getElementsByClassName("carousel-slide");
     let dots = document.getElementsByClassName("dot");
