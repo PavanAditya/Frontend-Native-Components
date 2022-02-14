@@ -17,4 +17,7 @@ Includes Features Like:
 - Has display styles for full rating and half rating only.
 <br />
 
+- Has button to add new rating bar dynamically (can add Infinite number of rating bars).
+<br />
+
 > A regular star rating display used on profile sections for many different apps(web and native).

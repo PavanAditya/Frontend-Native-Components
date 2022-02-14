@@ -1,0 +1,29 @@
+.breadcrumb-container {
+    height: 100%;
+    width: 100%;
+    padding-left: 50px;
+}
+
+.breadcrumb-bar {
+    margin: 50px;
+    margin-left: 25px;
+    padding: 5px;
+    padding-left: 15px;
+    border: 1px solid black;
+}
+
+.breadcrumb-tab {
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.breadcrumb-tab-active {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.current-tab {
+    font-size: 50px;
+    font-weight: bold;
+    margin-left: -50px;
+}
