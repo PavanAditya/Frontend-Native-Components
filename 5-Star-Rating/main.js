@@ -5,7 +5,6 @@ let displayAllRatingBars = function () {
     let ratingBlock = document.getElementById('rating-display');
     ratingBlock.removeChild(newRateBtn);
     let newRating = document.createElement('div');
-    console.log(allRatings, 'all')
     for (let i = 1; i <= allRatings.length; i++) {
         newRating.id = 'rating-div-' + i;
         newRating.className = 'rating-div';
@@ -51,7 +50,6 @@ let rating = function (rateNum, rateValue) {
         let star = document.getElementById('star-id-' + rateNum + i);
         star.className = star.className.replace(' star-rated', '');
     }
-    console.log(allRatings);
 }
 
 let hoverStar = function (rateNum, starNum) {
