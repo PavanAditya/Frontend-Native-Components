@@ -1,0 +1,38 @@
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+.loading-card {
+    width: 300px;
+    height: 500px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid black;
+}
+
+.loading-card h2, p, .image {
+    background: grey;
+    background: linear-gradient(115deg, grey 10%, silver 35%, grey 70%);
+    border-radius: 5px;
+    animation: 1.5s loading-card-animation linear infinite;
+    background-size: 200% 100%;
+}
+
+.image {
+    height: 150px;
+}
+
+h2 {
+    height: 50px;
+}
+
+p {
+    height: 150px;
+}
+
+@keyframes loading-card-animation {
+    to {
+        background-position-x: -150%;
+    }
+}
