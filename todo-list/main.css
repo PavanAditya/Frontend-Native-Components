@@ -1,0 +1,51 @@
+.container {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+.input-task {
+    width: 80%;
+    margin: 50px;
+    padding: 10px;
+}
+
+.to-do-list-display {
+    width: 80%;
+    margin: 50px;
+    padding: 10px;
+    background-color: grey;
+}
+
+.to-do-activity {
+    border: 1px solid black;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.to-do-activity h3 {
+    margin-left: 50px;
+    width: 68%;
+    display: inline-block;
+}
+
+.edit-btn {
+    color: green;
+    margin: 5px;
+}
+
+.delete-btn {
+    color: red;
+    margin: 5px;
+}
+.edit-button-div {
+    padding: 20px;
+    width: 15%;
+    display: inline;
+}
+.delete-button-div {
+    padding: 20px;
+    width: 15%;
+    display: inline;
+}
