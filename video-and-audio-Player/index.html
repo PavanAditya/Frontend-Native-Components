@@ -1,0 +1,35 @@
+<head>
+    <title>Video & Audio Player</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+    <div class="container" align="center">
+        <video id="video" src="video.mp4" controls height="300" width="500"></video>
+        <br />
+        <br />
+        <button type="button" onclick="play()">Play</button> &nbsp;
+        <button type="button" onclick="pause()">Pause</button> &nbsp;
+        <button type="button" onclick="mute()">Mute</button> &nbsp;
+        <button type="button" onclick="unmute()">Unmute</button> &nbsp;
+        <br />
+        <br />
+        Height: <input id="video-height" type="number" value="300" onchange="changeHeight()" />
+        <br />
+        <br />
+        Width: <input id="video-width" type="number" value="500" onchange="changeWidth()" />
+        <br />
+        <br />
+        <br />
+        <br />
+        <audio id="audio" src="audio.mp4" controls height="300" width="500"></audio>
+        <br />
+        <br />
+        <button type="button" onclick="playAudio()">Play</button> &nbsp;
+        <button type="button" onclick="pauseAudio()">Pause</button> &nbsp;
+        <button type="button" onclick="muteAudio()">Mute</button> &nbsp;
+        <button type="button" onclick="unmuteAudio()">Unmute</button> &nbsp;
+    </div>
+</body>
+
+<script src="./main.js"></script>
