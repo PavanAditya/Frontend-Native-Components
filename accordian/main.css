@@ -1,0 +1,21 @@
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+.acc-card {
+    margin-top: 250px;
+    padding-bottom: 25px;
+    width: 90%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.acc-detail {
+    display: none;
+    background: grey;
+    width: 95%;
+    padding: 25px;
+}

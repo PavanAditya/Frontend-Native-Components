@@ -1,6 +1,8 @@
 # Native Frontend Components
 ### Made with using plain HTML/CSS/JS
 
+```Many of the native components are only built to implement functionality and basic level of styling is added for display purposes. Animations and attarctive displays aren't included```
+
 ## Possible Machiene Coding Round questions for different Product based companies and also #MAANG companies.
 
 > Regular daily life web components which are implemented over a typical Web application.
@@ -22,5 +24,5 @@ Covers CSS styles like animations, fades, keyframes, hovers, responsiveness and 
 
 Cover native HTML window/document implementations like nexttick, bubbling, trickling and more
 
-### Useful for Machiene coding and Frontend specific technical rounds of many Product Based Companies
-### #maang - Meta, Amazon, Apple, Netflix, Google Interview probable/asked questions.
+## Useful for Machiene coding and Frontend specific technical rounds of many Product Based Companies
+## #maang - Meta, Amazon, Apple, Netflix, Google Interview probable/asked questions.
