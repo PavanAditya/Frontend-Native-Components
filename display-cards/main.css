@@ -1,0 +1,32 @@
+.container {
+    height: 100%;
+    width: 100%;
+}
+.cards-display-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.card {
+    height: 500px;
+    width: 300px;
+    margin: 1% 2%;
+    border-radius: 5px;
+    border: 1px solid black;
+    overflow: hidden;
+}
+.card-image {
+    width: 100%;
+    height: 50%;
+    border-radius: 5px 5px 0 0;
+}
+.card-content {
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+}
+.card-description {
+    padding: 10px;
+    height: 65%;
+    text-align: justify;
+}
