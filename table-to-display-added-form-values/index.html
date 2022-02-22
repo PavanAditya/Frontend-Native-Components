@@ -1,0 +1,159 @@
+<html>
+
+<head>
+    <title>Form Display Table</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="details" class="input-form" align="center">
+            <form name="details-form" id="details-form" align="center">
+
+                <label for="full-name" id="name-label">Full Name:</label>
+                <input id="full-name" name="full-name" value="" placeholder="Enter your Full Name" type="text" />
+                <br />
+                <br />
+                <label for="person-id" id="person-id-label">Work ID:</label>
+                <input id="person-id" name="person-id" value="" placeholder="Enter your Work ID" type="text" />
+                <br />
+                <br />
+
+                <label for="contact" id="contact-label">Contact:</label>
+                <input id="contact" name="contact" value="" placeholder="Enter your contact Number" type="number"
+                    max="9999999999" maxlength="10" />
+                <br />
+                <br />
+
+                <label for="gender" id="gender-label">Gender:</label>
+                <select id="gender" name="gender" value="">
+                    <option></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <br />
+                <br />
+
+                <span>Select work domain:</span> <br />
+                <input id="radio-1" name="domain" value="Frontend" type="radio" />
+                <label for="radio-1" id="radio-1-label"> Frontend</label>
+                <input id="radio-2" name="domain" value="Backend" type="radio" />
+                <label for="radio-2" id="radio-2-label"> Backend</label>
+                <input id="radio-3" name="domain" value="Fullstack" type="radio" />
+                <label for="radio-3" id="radio-3-label"> Fullstack</label>
+                <br />
+                <br />
+
+                <input id="tnc" name="tnc" value="false" type="checkbox" />
+                <label for="tnc" id="tnc-label"> I Accept all the terms and conditions</label>
+                <br />
+                <br />
+                <button type="button" onclick="addNewFormValue()">Submit Form</button>
+            </form>
+        </div>
+        <div class="display-table" align="center">
+            <table id="details-table" class="details-table">
+                <thead id="details-table-head">
+                    <th>Sr No.</th>
+                    <th>Full Name</th>
+                    <th>Work ID</th>
+                    <th>Contact</th>
+                    <th>Gender</th>
+                    <th>Work Domain</th>
+                    <th>Tnc Accepted</th>
+                </thead>
+                <tbody id="details-table-body"></tbody>
+            </table>
+        </div>
+        <div class="clear-table" align="right">
+            <button type="button" onclick="clearTable()">Clear Table</button>
+        </div>
+    </div>
+</body>
+<style>
+    .containier {
+        height: 100%;
+        width: 100%;
+    }
+    
+    .clear-table {
+        margin-top: 25px;
+        width: 90%;
+    }
+
+    table {
+        width: 80%;
+        border: 1px solid black;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        padding: 2px;
+    }
+</style>
+<script>
+    let tableValues = localStorage.getItem('tableValues') ? JSON.parse(localStorage.getItem('tableValues')) : [];
+    localStorage.setItem('tableValues', JSON.stringify(tableValues));
+
+    let displayTableData = () => {
+        let tableBody = document.getElementById('details-table-body');
+        for (let i = tableBody.childNodes.length; i < tableValues.length; i++) {
+            let tableRow = document.createElement('tr');
+            let tableDataSrNum = document.createElement('td');
+            let tableDataName = document.createElement('td');
+            let tableDataWorkId = document.createElement('td');
+            let tableDataContact = document.createElement('td');
+            let tableDataGender = document.createElement('td');
+            let tableDataDomain = document.createElement('td');
+            let tableDataTnc = document.createElement('td');
+            console.log(tableValues[i])
+            tableDataSrNum.innerHTML = tableValues[i].id;
+            tableDataName.innerHTML = tableValues[i].name;
+            tableDataWorkId.innerHTML = tableValues[i].workId;
+            tableDataContact.innerHTML = tableValues[i].contact;
+            tableDataGender.innerHTML = tableValues[i].gender;
+            tableDataDomain.innerHTML = tableValues[i].domain;
+            tableDataTnc.innerHTML = tableValues[i].tnc;
+            tableRow.appendChild(tableDataSrNum);
+            tableRow.appendChild(tableDataName);
+            tableRow.appendChild(tableDataWorkId);
+            tableRow.appendChild(tableDataContact);
+            tableRow.appendChild(tableDataGender);
+            tableRow.appendChild(tableDataDomain);
+            tableRow.appendChild(tableDataTnc);
+            tableBody.appendChild(tableRow);
+        };
+    }
+
+    if (localStorage.getItem('tableValues')) {
+        displayTableData();
+    }
+
+    let addNewFormValue = () => {
+        let formElements = document.getElementById('details-form').elements;
+        console.log(formElements);
+        let formObject = {};
+        formObject['id'] = tableValues.length + 1;
+        formObject['name'] = formElements['full-name'].value;
+        formObject['workId'] = formElements['person-id'].value;
+        formObject['contact'] = formElements['contact'].value;
+        formObject['gender'] = formElements['gender'].value;
+        formObject['domain'] = formElements['domain'].value;
+        formObject['tnc'] = formElements['tnc'].checked;
+        tableValues.push(formObject);
+        console.log(tableValues)
+        localStorage.setItem('tableValues', JSON.stringify(tableValues));
+        displayTableData();
+        document.getElementById('details-form').reset();
+    }
+
+    let clearTable = () => {
+        document.getElementById('details-table-body').innerHTML = '';
+        tableValues = [];
+        localStorage.clear();
+    };
+</script>
+
+</html>
