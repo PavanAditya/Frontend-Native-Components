@@ -65,6 +65,24 @@
                 </thead>
                 <tbody id="details-table-body"></tbody>
             </table>
+            <br />
+            <br />
+            <button onclick="loadMore()">Load More</button>
+            <br />
+            <br />
+
+            <table id="temp-details-table" class="temp-details-table">
+                <thead id="temp-details-table-head">
+                    <th>Sr No.</th>
+                    <th>Full Name</th>
+                    <th>Work ID</th>
+                    <th>Contact</th>
+                    <th>Gender</th>
+                    <th>Work Domain</th>
+                    <th>Tnc Accepted</th>
+                </thead>
+                <tbody id="recently-added" class="recently-added"></tbody>
+            </table>
         </div>
         <div class="clear-table" align="right">
             <button type="button" onclick="clearTable()">Clear Table</button>
@@ -76,7 +94,7 @@
         height: 100%;
         width: 100%;
     }
-    
+
     .clear-table {
         margin-top: 25px;
         width: 90%;
@@ -92,14 +110,24 @@
         border: 1px solid black;
         padding: 2px;
     }
+
+    .temp-details-table {
+        margin-top: 25px;
+        display: none;
+    }
+
+    .temp-details-table>thead,
+    .temp-details-table>tbody {
+        width: 100%;
+    }
 </style>
 <script>
     let tableValues = localStorage.getItem('tableValues') ? JSON.parse(localStorage.getItem('tableValues')) : [];
     localStorage.setItem('tableValues', JSON.stringify(tableValues));
 
-    let displayTableData = () => {
+    let formTableData = (startLength, length) => {
         let tableBody = document.getElementById('details-table-body');
-        for (let i = tableBody.childNodes.length; i < tableValues.length; i++) {
+        for (let i = startLength; i < length; i++) {
             let tableRow = document.createElement('tr');
             let tableDataSrNum = document.createElement('td');
             let tableDataName = document.createElement('td');
@@ -124,11 +152,52 @@
             tableRow.appendChild(tableDataDomain);
             tableRow.appendChild(tableDataTnc);
             tableBody.appendChild(tableRow);
-        };
+        }
+    }
+
+    let initialDisplayTableData = () => {
+        if (tableValues.length < 10)
+            formTableData(0, tableValues.length);
+        else
+            formTableData(0, 10);
+    }
+
+    let loadMore = () => {
+        let tableBody = document.getElementById('details-table-body');
+        formTableData(tableBody.childNodes.length, tableBody.childNodes.length + 10);
     }
 
     if (localStorage.getItem('tableValues')) {
-        displayTableData();
+        initialDisplayTableData();
+    }
+
+    displayNewTableData = (formObject) => {
+        let tempTableBody = document.getElementById('recently-added');
+        document.getElementById('temp-details-table').style.display = tableValues.length > 10 ? 'inline-table' : 'none';
+        tempTableBody.innerHTML = '';
+        let tableRow = document.createElement('tr');
+        let tableDataSrNum = document.createElement('td');
+        let tableDataName = document.createElement('td');
+        let tableDataWorkId = document.createElement('td');
+        let tableDataContact = document.createElement('td');
+        let tableDataGender = document.createElement('td');
+        let tableDataDomain = document.createElement('td');
+        let tableDataTnc = document.createElement('td');
+        tableDataSrNum.innerHTML = formObject.id;
+        tableDataName.innerHTML = formObject.name;
+        tableDataWorkId.innerHTML = formObject.workId;
+        tableDataContact.innerHTML = formObject.contact;
+        tableDataGender.innerHTML = formObject.gender;
+        tableDataDomain.innerHTML = formObject.domain;
+        tableDataTnc.innerHTML = formObject.tnc;
+        tableRow.appendChild(tableDataSrNum);
+        tableRow.appendChild(tableDataName);
+        tableRow.appendChild(tableDataWorkId);
+        tableRow.appendChild(tableDataContact);
+        tableRow.appendChild(tableDataGender);
+        tableRow.appendChild(tableDataDomain);
+        tableRow.appendChild(tableDataTnc);
+        tempTableBody.appendChild(tableRow);
     }
 
     let addNewFormValue = () => {
@@ -145,7 +214,7 @@
         tableValues.push(formObject);
         console.log(tableValues)
         localStorage.setItem('tableValues', JSON.stringify(tableValues));
-        displayTableData();
+        displayNewTableData(formObject);
         document.getElementById('details-form').reset();
     }
 
