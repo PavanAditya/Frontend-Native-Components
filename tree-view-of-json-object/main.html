@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JSON Tree View</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+</body>
+<script>
+
+    function TreeView({
+        data,
+        toggled = true,
+        name = null,
+        isLast = true,
+        isChildElement = false,
+        isParentToggled = true
+    }) {
+        const [isToggled, setIsToggled] = React.useState(toggled);
+
+        return (
+            <div style={{ marginLeft: isChildElement ? 16 : 4 + "px" }} className={isParentToggled ? "tree-element" : "tree-element collapsed"}>
+                <span className={isToggled ? "toggler" : "toggler closed"} onClick={() => setIsToggled(!isToggled)}
+                />
+                {name ? <strong>&nbsp;&nbsp;{name}: </strong> : <span>&nbsp;&nbsp;</span>}
+                {Array.isArray(data) ? "[" : "{"}
+                {!isToggled && "..."}
+                {Object.keys(data).map(
+                    (v, i, a) =>
+                        typeof data[v] == "object" ? (
+                            <TreeView data={data[v]} isLast={i === a.length - 1} name={Array.isArray(data) ? null : v} isChildElement
+                                isParentToggled={isParentToggled && isToggled} />
+                        ) : (
+                            <p style={{ marginLeft: 16 + "px" }} className={isToggled ? "tree-element" : "tree-element collapsed"}>
+                                {Array.isArray(data) ? "" : <strong>{v}: </strong>}
+                                {data[v]}
+                                {i === a.length - 1 ? "" : ","}
+                            </p>
+                        )
+                )}
+                {Array.isArray(data) ? "]" : "}"}
+                {!isLast ? "," : ""}
+            </div>
+        );
+    }
+
+    let data = {
+        lorem: {
+            ipsum: "dolor sit",
+            amet: {
+                consectetur: "adipiscing",
+                elit: [
+                    "duis",
+                    "vitae",
+                    {
+                        semper: "orci"
+                    },
+                    {
+                        est: "sed ornare"
+                    },
+                    "etiam",
+                    ["laoreet", "tincidunt"],
+                    ["vestibulum", "ante"]
+                ]
+            },
+            ipsum: "primis"
+        }
+    };
+    ReactDOM.render(<TreeView data={data} name='data' />, document.getElementById("root"));
+
+</script>
+
+</html>
