@@ -1,0 +1,19 @@
+.celda {
+    position: absolute;
+    height: 18px;
+    color: black;
+    width: 100%;
+    font-family: Arial;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    border-right: 1px dotted silver;
+    border-bottom-color: 1px solid silver;
+    cursor: default;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.green_bg {
+    color: black;
+    background: #bada55;
+}
