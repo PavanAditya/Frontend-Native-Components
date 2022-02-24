@@ -8,13 +8,13 @@ function VirtualList(config) {
     this.totalRows = config.totalRows || (config.items && config.items.length);
 
     var totalHeight = itemHeight * this.totalRows;
-    this.scroller = VirtualList.createScroller(totalHeight);
+    this.viewport = VirtualList.createViewport(totalHeight);
     this.container = VirtualList.createContainer(width, height);
 
     var screenItemsLen = Math.ceil(config.h / itemHeight);
-    // Cache 4 times the number of items that fit in the container viewport
+    // ? Caching 3 times the number of items that fit in the viewport
     var cachedItemsLen = screenItemsLen * 3;
-    this._renderChunk(this.container, 0, cachedItemsLen / 2);
+    this._renderChunk(this.container, 0, cachedItemsLen);
 
     var self = this;
     var lastRepaintY;
@@ -35,17 +35,21 @@ function VirtualList(config) {
     this.container.addEventListener("scroll", onScroll);
 }
 
+// ? Core Logic for clearing existing items and rendering new items.
 VirtualList.prototype._renderChunk = function (node, fromPos, howMany) {
+    // ? A new fragment is called for each chunk render (renderChunk is triggered on every scroll event)
     var fragment = document.createDocumentFragment();
-    fragment.appendChild(this.scroller);
+    fragment.appendChild(this.viewport);
 
     var finalItem = fromPos + howMany;
     finalItem = finalItem > this.totalRows ? this.totalRows : finalItem;
 
+    // ? Creating new items for caching into the viewport after the scroll event is fired.
+    // ? Created number of items are 3 times the number of items that fit in the container viewport.
     for (var i = fromPos; i < finalItem; i++) {
         var item;
         if (this.generatorFn) item = this.generatorFn(i);
-        else {
+        else { // ? Implemented only if no generatorFn is provided
             console.log(this.items)
             if (typeof this.items[i] === "string") {
                 var itemText = document.createTextNode(this.items[i]);
@@ -57,14 +61,14 @@ VirtualList.prototype._renderChunk = function (node, fromPos, howMany) {
             }
         }
 
-        item.classList.add("vrow");
         item.style.position = "absolute";
         item.style.top = i * this.itemHeight + "px";
         fragment.appendChild(item);
     }
 
     node.innerHTML = "";
-    node.appendChild(fragment);
+    // ? Appending the newly created fragment to the container.
+    node.appendChild(fragment); 
 };
 
 VirtualList.createContainer = function (w, h) {
@@ -78,19 +82,19 @@ VirtualList.createContainer = function (w, h) {
     return c;
 };
 
-VirtualList.createScroller = function (h) {
-    var scroller = document.createElement("div");
-    scroller.style.opacity = 0;
-    scroller.style.position = "absolute";
-    scroller.style.top = 0;
-    scroller.style.left = 0;
-    scroller.style.width = "1px";
-    scroller.style.height = h + "px";
-    return scroller;
+VirtualList.createViewport = function (h) {
+    var viewport = document.createElement("div");
+    viewport.style.opacity = 0;
+    viewport.style.position = "absolute";
+    viewport.style.top = 0;
+    viewport.style.left = 0;
+    viewport.style.width = "1px";
+    viewport.style.height = h + "px";
+    return viewport;
 };
 
 var list = new VirtualList({
-    // w: 300,
+    w: 300,
     h: 300,
     itemHeight: 31,
     totalRows: 1000000,
